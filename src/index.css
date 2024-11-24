@@ -6,7 +6,7 @@
 
 @layer base {
     body {
-        @apply bg-default bg-gradient-radial
+        @apply bg-default bg-gradient-radial text-default
     }
     html {
         font-family: 'Poppins', sans-serif;
