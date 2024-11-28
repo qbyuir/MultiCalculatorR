@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Matcalc } from './matCalc'
+import Matcalc from './matCalc'
 
 export function Multicalculator() {
 

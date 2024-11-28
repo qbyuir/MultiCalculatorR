@@ -7,7 +7,8 @@ export default {
   theme: {
     extend: {
       backgroundColor: {
-        'default': '#100a1c'
+        'default': '#100a1c',
+        'btn-hover': 'rgba(42, 50, 113, 0.28);',
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(50% 30% ellipse at center top, #3c2d61 0%,rgba(0, 0, 0, 0) 100%), radial-gradient(60% 50% ellipse at center bottom, #1e0d41 0%, #100a1c 100%)'

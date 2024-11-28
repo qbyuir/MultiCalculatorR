@@ -1,76 +1,175 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-export function Matcalc() {
+export default function Matcalc() {
+  useEffect(() => {
+    var viewer = document.querySelector('#viewer');
+    var equals = document.querySelector('#equals');
+    var clear = document.querySelector('#clear');
+    var nums = document.querySelectorAll('#num');
+    var ops = document.querySelectorAll('#ops');
 
-    return (
-     <>
-       {/* <div id="sciCalc" className="text-center p-8 ml-15 w-[calc(100% - 240px)]">
-            <h2 id="sciTitle" className="text-default text-2r max-w-60r left-1/2 bottom-7/8 absolute -translate-x-2/4 -translate-y-2/4">Calculadora Científica</h2>
-         <div id="sci-calculator" className="absolute m-0 mx-auto text-28px w-40 pt-20 pb-8 px-0 top-55 left-1/2 -translate-x-2/4 -translate-y-2/4">
-            <button class="clear" id="clear" className="text-default cursor-pointer bg-transparent float-left w-8 h-8 m-1 border-0 rounded-2xl transition-btn">C</button>
-            <div class="viewer "id="viewer" className="text-default float-left text-right text-ellipsis overflow-hidden leading-3r pr-1.6 w-7.5 h-12">0</div>
-            <button class="num" data-num="7" className="text-default cursor-pointer bg-transparent float-left w-8 h-8 m-1 border-0 rounded-2xl transition-btn">7</button>
-            <button class="num" data-num="8" className="text-default cursor-pointer bg-transparent float-left w-8 h-8 m-1 border-0 rounded-2xl transition-btn">8</button>
-            <button class="num" data-num="9" className="text-default cursor-pointer bg-transparent float-left w-8 h-8 m-1 border-0 rounded-2xl transition-btn">9</button>
-            <button class="ops" data-ops="plus" id="plus" className="text-default cursor-pointer bg-transparent float-left w-8 h-8 m-1 border-0 rounded-2xl transition-btn">+</button>
+    var theNum = '';
+    var prevNum = '';
+    var resultNum;
+    var operator;
+    var lastInput = ''
 
-            <button class="num" data-num="4" className="text-default cursor-pointer bg-transparent float-left w-8 h-8 m-1 border-0 rounded-2xl transition-btn">4</button>
-            <button class="num" data-num="5" className="text-default cursor-pointer bg-transparent float-left w-8 h-8 m-1 border-0 rounded-2xl transition-btn">5</button>
-            <button class="num" data-num="6" className="text-default cursor-pointer bg-transparent float-left w-8 h-8 m-1 border-0 rounded-2xl transition-btn">6</button>
-            <button class="ops" data-ops="minus" className="text-default cursor-pointer bg-transparent float-left w-8 h-8 m-1 border-0 rounded-2xl transition-btn">-</button>
+    nums.forEach((num) => {
+      num.addEventListener('click', (e) => {
+        theNum += e.target.getAttribute('data-num');
+        viewer.innerText = theNum;
+      });
+    });
 
-            <button class="num" data-num="1" className="text-default cursor-pointer bg-transparent float-left w-8 h-8 m-1 border-0 rounded-2xl transition-btn">1</button>
-            <button class="num" data-num="2" className="text-default cursor-pointer bg-transparent float-left w-8 h-8 m-1 border-0 rounded-2xl transition-btn">2</button>
-            <button class="num" data-num="3" className="text-default cursor-pointer bg-transparent float-left w-8 h-8 m-1 border-0 rounded-2xl transition-btn">3</button>
-            <button class="ops" data-ops="times" className="text-default cursor-pointer bg-transparent float-left w-8 h-8 m-1 border-0 rounded-2xl transition-btn">*</button>
+    ops.forEach((op) => {
+      op.addEventListener('click', (e) => {
+        prevNum = theNum;
+        theNum = '';
+        operator = e.target.getAttribute('data-ops');
+        switch (operator) {
+          case 'plus':
+            viewer.innerText = '+';
+            break;
+          case 'minus':
+            viewer.innerText = '-';
+            break;
+          case 'times':
+            viewer.innerText = '*';
+            break;
+          case 'divided by':
+            viewer.innerText = '/';
+            break;
+          case 'sin':
+            viewer.innerText = 'sin('
+            break;
+          case 'cos':
+            viewer.innerText = 'cos('
+            break;
+          case 'tan':
+            viewer.innerText = 'tan('
+            break;
+          case 'pi':
+            viewer.innerText = 'π'
+            break;
+          case 'sqrt':
+            viewer.innerText = '√'
+            break;
+          case 'nth-root':
+            viewer.innerText = 'n√('
+            break;
+          case 'power':
+            viewer.innerText = '^'
+            break;
+          case 'nth-power':
+            viewer.innerText = 'x^n'
+            break;
+          }
+          lastInput = operator
+      });
+    });
 
-            <button class="num" data-num="0" className="text-default cursor-pointer bg-transparent float-left w-8 h-8 m-1 border-0 rounded-2xl transition-btn">0</button>
-            <button class="num" data-num="." className="text-default cursor-pointer bg-transparent float-left w-8 h-8 m-1 border-0 rounded-2xl transition-btn">.</button>
-         </div>
-       </div> */}
-        <h2 id="calcTitle" className="absolute text-2r max-w-60r bottom-7/8 left-1/2 -translate-x-1/2 -translate-y-1/2"> Calculadora Científica </h2>
+    equals.addEventListener('click', () => {
+      prevNum = parseFloat(prevNum);
+      theNum = parseFloat(theNum);
+      switch (operator) {
+        case 'plus':
+          resultNum = prevNum + theNum;
+          break;
+        case 'minus':
+          resultNum = prevNum - theNum;
+          break;
+        case 'times':
+          resultNum = prevNum * theNum;
+          break;
+        case 'divided by':
+          resultNum = prevNum / theNum;
+          break;
+        case 'sin':
+          resultNum = Math.sin(theNum)
+          break;
+        case 'cos':
+          resultNum = Math.cos(theNum)
+          break;
+        case 'tan':
+          resultNum = Math.tan(theNum)
+          break;
+        case 'pi':
+          resultNum = Math.PI
+          break;
+        case 'sqrt':
+          resultNum = Math.sqrt(theNum)
+          break;
+        case 'nth-root':
+          resultNum = Math.pow(prevNum, 1 / theNum)
+          break;
+        case 'power':
+          resultNum = Math.pow(prevNum, theNum)
+          break;
+        case 'nth-power':
+          resultNum = Math.pow(prevNum, theNum)
+          break;
+        default:
+          resultNum = theNum;
+      }
+      viewer.innerText = resultNum;
+      prevNum = '';
+      theNum = resultNum;
+    });
+
+    clear.addEventListener('click', () => {
+      prevNum = '';
+      theNum = '';
+      viewer.innerText = '0';
+    });
+
+    return () => {
+      nums.forEach((num) => num.removeEventListener('click', () => {}));
+      ops.forEach((op) => op.removeEventListener('click', () => {}));
+      equals.removeEventListener('click', () => {});
+      clear.removeEventListener('click', () => {});
+    };
+  }, []);
+
+  return (
+    <>
+      <h2 id="calcTitle" className="absolute font-normal text-2r max-w-60r bottom-7/8 left-1/2 -translate-x-1/2 -translate-y-1/2">
+        Calculadora Científica
+      </h2>
+
+      <div id="calculator" className="absolute mx-[auto] my-0 w-[10em] text-[28px] pt-[5em] px-0 pb-[2em] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
+        <button id="clear" className="float-left [font:inherit] border-[0] rounded-[1em] m-[0.25em] w-[2em] h-[2em] hover:bg-[rgba(42,_50,_113,_0.28)] [transition:all_0.5s]">C</button>
+        <div id="viewer" className="whitespace-nowrapfloat-left text-right text-ellipsis overflow-hidden leading-[2.5em] w-[7.5em] h-[3em] pr-[1.6rem]">0</div>
+
+        <button id="num" data-num="7" className="float-left [font:inherit] border-[0] rounded-[1em] m-[0.25em] w-[2em] h-[2em] hover:bg-[rgba(42,_50,_113,_0.28)] [transition:all_0.5s]">7</button>
+        <button id="num" data-num="8" className="float-left [font:inherit] border-[0] rounded-[1em] m-[0.25em] w-[2em] h-[2em] hover:bg-[rgba(42,_50,_113,_0.28)] [transition:all_0.5s]">8</button>
+        <button id="num" data-num="9" className="float-left [font:inherit] border-[0] rounded-[1em] m-[0.25em] w-[2em] h-[2em] hover:bg-[rgba(42,_50,_113,_0.28)] [transition:all_0.5s]">9</button>
+        <button id="ops" data-ops="plus" className="float-left [font:inherit] border-[0] rounded-[1em] m-[0.25em] w-[2em] h-[2em] hover:bg-[rgba(42,_50,_113,_0.28)] [transition:all_0.5s]">+</button>
+
+        <button id="num" data-num="4" className="float-left [font:inherit] border-[0] rounded-[1em] m-[0.25em] w-[2em] h-[2em] hover:bg-[rgba(42,_50,_113,_0.28)] [transition:all_0.5s]">4</button>
+        <button id="num" data-num="5" className="float-left [font:inherit] border-[0] rounded-[1em] m-[0.25em] w-[2em] h-[2em] hover:bg-[rgba(42,_50,_113,_0.28)] [transition:all_0.5s]">5</button>
+        <button id="num" data-num="6" className="float-left [font:inherit] border-[0] rounded-[1em] m-[0.25em] w-[2em] h-[2em] hover:bg-[rgba(42,_50,_113,_0.28)] [transition:all_0.5s]">6</button>
+        <button id="ops" data-ops="minus" className="float-left [font:inherit] border-[0] rounded-[1em] m-[0.25em] w-[2em] h-[2em] hover:bg-[rgba(42,_50,_113,_0.28)] [transition:all_0.5s]">-</button>
+
+        <button id="num" data-num="1" className="float-left [font:inherit] border-[0] rounded-[1em] m-[0.25em] w-[2em] h-[2em] hover:bg-[rgba(42,_50,_113,_0.28)] [transition:all_0.5s]">1</button>
+        <button id="num" data-num="2" className="float-left [font:inherit] border-[0] rounded-[1em] m-[0.25em] w-[2em] h-[2em] hover:bg-[rgba(42,_50,_113,_0.28)] [transition:all_0.5s]">2</button>
+        <button id="num" data-num="3" className="float-left [font:inherit] border-[0] rounded-[1em] m-[0.25em] w-[2em] h-[2em] hover:bg-[rgba(42,_50,_113,_0.28)] [transition:all_0.5s]">3</button>
+        <button id="ops" data-ops="times" className="float-left [font:inherit] border-[0] rounded-[1em] m-[0.25em] w-[2em] h-[2em] hover:bg-[rgba(42,_50,_113,_0.28)] [transition:all_0.5s]">*</button>
+
+        <button id="num" data-num="0" className="float-left [font:inherit] border-[0] rounded-[1em] m-[0.25em] w-[2em] h-[2em] hover:bg-[rgba(42,_50,_113,_0.28)] [transition:all_0.5s]">0</button>
+        <button id="num" data-num="." className="float-left [font:inherit] border-[0] rounded-[1em] m-[0.25em] w-[2em] h-[2em] hover:bg-[rgba(42,_50,_113,_0.28)] [transition:all_0.5s]">.</button>
+        <button id="equals" data-result="" className="float-left [font:inherit] border-[0] rounded-[1em] m-[0.25em] w-[2em] h-[2em] hover:bg-[rgba(42,_50,_113,_0.28)] [transition:all_0.5s]">=</button>
+        <button id="ops" data-ops="divided by" className="float-left [font:inherit] border-[0] rounded-[1em] m-[0.25em] w-[2em] h-[2em] hover:bg-[rgba(42,_50,_113,_0.28)] [transition:all_0.5s]">/</button>
+
+        <button id="ops" data-ops="sin" className="float-left [font:inherit] border-[0] rounded-[1em] m-[0.25em] w-[2em] h-[2em] hover:bg-[rgba(42,_50,_113,_0.28)] [transition:all_0.5s]">sin</button>
+        <button id="ops" data-ops="cos" className="float-left [font:inherit] border-[0] rounded-[1em] m-[0.25em] w-[2em] h-[2em] hover:bg-[rgba(42,_50,_113,_0.28)] [transition:all_0.5s]">cos</button>
+        <button id="ops" data-ops="tan" className="float-left [font:inherit] border-[0] rounded-[1em] m-[0.25em] w-[2em] h-[2em] hover:bg-[rgba(42,_50,_113,_0.28)] [transition:all_0.5s]">tan</button>
+        <button id="ops" data-ops="pi" className="float-left [font:inherit] border-[0] rounded-[1em] m-[0.25em] w-[2em] h-[2em] hover:bg-[rgba(42,_50,_113,_0.28)] [transition:all_0.5s]">π</button>
         
-        <div className="absolute m-0 w-40 text-28px pt-20 pb-8 top-55 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center" class="calculator">
-        
-          <button class="clear" className="">C</button>
-          <div class="viewer" className=" float-left text-right text-ellipsis overflow-hidden leading-3r w-7.5 h-12 pr-1.6">0</div>
-          
-          <button class="num" className="">7</button>
-          <button class="num" className="">8</button>
-          <button class="num" className="">9</button>
-          <button class="ops" data-ops="ops" className="">+</button>
-          
-          <button class="num" className="">4</button>
-          <button class="num" className="">5</button>
-          <button class="num" className="">6</button>
-          <button class="ops" className="">-</button>
-          
-          <button class="num" className="">1</button>
-          <button class="num" className="">2</button>
-          <button class="num" className="">3</button>
-          <button class="ops" className="">*</button>
-          
-          <button class="num" className="">0</button>
-          <button class="num" className="">.</button>
-          <button class="equals" className="">=</button>
-          <button class="ops" className="">/</button>
-
-          <button class="sin">sin</button>
-          <button class="cos">cos</button>
-          <button class="tan">tan</button>
-        
-          <button class="pi">π</button>
-          <button class="root">√</button>
-          <button class="exp">tan</button>
-          <button class="exp">sin</button>
-          <button class="ops">cos</button>
-          <button class="ops">tan</button>
-          <button class="ops">tan</button>
-        
- 
- 
-        </div>
-
-     </>
-    )
+        <button id="ops" data-ops="sqrt" className="float-left [font:inherit] border-[0] rounded-[1em] m-[0.25em] w-[2em] h-[2em] hover:bg-[rgba(42,_50,_113,_0.28)] [transition:all_0.5s]">√</button>
+        <button id="ops" data-ops="nth-root" className="float-left [font:inherit] border-[0] rounded-[1em] m-[0.25em] w-[2em] h-[2em] hover:bg-[rgba(42,_50,_113,_0.28)] [transition:all_0.5s]">ⁿ√</button>
+        <button id="ops" data-ops="power" className="float-left [font:inherit] border-[0] rounded-[1em] m-[0.25em] w-[2em] h-[2em] hover:bg-[rgba(42,_50,_113,_0.28)] [transition:all_0.5s]">a²</button>
+        <button id="ops" data-ops="nth-power" className="float-left [font:inherit] border-[0] rounded-[1em] m-[0.25em] w-[2em] h-[2em] hover:bg-[rgba(42,_50,_113,_0.28)] [transition:all_0.5s]">aᵇ</button>
+      </div>
+    </>
+  );
 }
