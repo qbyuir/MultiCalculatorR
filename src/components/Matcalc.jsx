@@ -48,20 +48,8 @@ export default function Matcalc() {
           case 'tan':
             viewer.innerText = 'tan('
             break;
-          case 'pi':
-            viewer.innerText = 'π'
-            break;
           case 'sqrt':
             viewer.innerText = '√'
-            break;
-          case 'nth-root':
-            viewer.innerText = 'n√('
-            break;
-          case 'power':
-            viewer.innerText = '^'
-            break;
-          case 'nth-power':
-            viewer.innerText = 'x^n'
             break;
           }
           lastInput = operator
@@ -93,20 +81,8 @@ export default function Matcalc() {
         case 'tan':
           resultNum = Math.tan(theNum)
           break;
-        case 'pi':
-          resultNum = Math.PI
-          break;
         case 'sqrt':
           resultNum = Math.sqrt(theNum)
-          break;
-        case 'nth-root':
-          resultNum = Math.pow(prevNum, 1 / theNum)
-          break;
-        case 'power':
-          resultNum = Math.pow(prevNum, theNum)
-          break;
-        case 'nth-power':
-          resultNum = Math.pow(prevNum, theNum)
           break;
         default:
           resultNum = theNum;
@@ -163,12 +139,8 @@ export default function Matcalc() {
         <button id="ops" data-ops="sin" className="float-left [font:inherit] border-[0] rounded-[1em] m-[0.25em] w-[2em] h-[2em] hover:bg-[rgba(42,_50,_113,_0.28)] [transition:all_0.5s]">sin</button>
         <button id="ops" data-ops="cos" className="float-left [font:inherit] border-[0] rounded-[1em] m-[0.25em] w-[2em] h-[2em] hover:bg-[rgba(42,_50,_113,_0.28)] [transition:all_0.5s]">cos</button>
         <button id="ops" data-ops="tan" className="float-left [font:inherit] border-[0] rounded-[1em] m-[0.25em] w-[2em] h-[2em] hover:bg-[rgba(42,_50,_113,_0.28)] [transition:all_0.5s]">tan</button>
-        <button id="ops" data-ops="pi" className="float-left [font:inherit] border-[0] rounded-[1em] m-[0.25em] w-[2em] h-[2em] hover:bg-[rgba(42,_50,_113,_0.28)] [transition:all_0.5s]">π</button>
-        
         <button id="ops" data-ops="sqrt" className="float-left [font:inherit] border-[0] rounded-[1em] m-[0.25em] w-[2em] h-[2em] hover:bg-[rgba(42,_50,_113,_0.28)] [transition:all_0.5s]">√</button>
-        <button id="ops" data-ops="nth-root" className="float-left [font:inherit] border-[0] rounded-[1em] m-[0.25em] w-[2em] h-[2em] hover:bg-[rgba(42,_50,_113,_0.28)] [transition:all_0.5s]">ⁿ√</button>
-        <button id="ops" data-ops="power" className="float-left [font:inherit] border-[0] rounded-[1em] m-[0.25em] w-[2em] h-[2em] hover:bg-[rgba(42,_50,_113,_0.28)] [transition:all_0.5s]">a²</button>
-        <button id="ops" data-ops="nth-power" className="float-left [font:inherit] border-[0] rounded-[1em] m-[0.25em] w-[2em] h-[2em] hover:bg-[rgba(42,_50,_113,_0.28)] [transition:all_0.5s]">aᵇ</button>
+        
       </div>
     </>
   );
