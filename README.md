@@ -1,8 +1,7 @@
-# React + Vite
+# Calculadora Científica com React, Vite e Tailwindcss!
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Calculadora científica feita com react, vite e tailwindcss disponibilizando cálculos de soma, subtração, multiplicação, divisão, raíz quadrada, seno, cosseno e tangente.
 
-Currently, two official plugins are available:
+# Scientific Calculator with React, Vite and Tailwindcss!
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Scientific calculator made with react, vite and tailwindcss that adds, subtracts, multiplies, divides, calculate square roots, sin, cos and tan. 
